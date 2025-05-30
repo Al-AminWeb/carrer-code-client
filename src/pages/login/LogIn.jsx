@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {use} from 'react';
+import AuthContext from "../../context/AuthContext/AuthContext.jsx";
 
 
 const LogIn = () => {
-
+    const {logInUser} = use(AuthContext)
     const handleLogin = async (e) => {
         e.preventDefault();
         e.preventDefault();
@@ -11,13 +12,22 @@ const LogIn = () => {
         const password = form.password.value;
         console.log({ email, password });
 
+        logInUser(email, password)
+        .then(result=>{
+            console.log(result);
+        })
+            .catch(err=>{
+                console.log(err)
+            })
+
+
     };
 
     return (
 
         <div
             className="hero bg-gradient-to-br from-primary via-accent to-secondary min-h-screen flex items-center justify-center p-4">
-            {/* Card for the login form */}
+
             <div
                 className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl transform transition-all hover:scale-105 duration-300">
                 <div className="card-body p-8 md:p-12">
